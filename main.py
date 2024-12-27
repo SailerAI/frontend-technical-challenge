@@ -9,6 +9,8 @@ from fastapi import (
     WebSocket,
     WebSocketDisconnect,
 )
+from fastapi.middleware.cors import CORSMiddleware
+
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from datetime import datetime
@@ -18,6 +20,14 @@ import random
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 BOT_USER_ID = "bot_user"
